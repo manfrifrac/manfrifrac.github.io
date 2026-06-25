@@ -433,6 +433,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
         composer.render();
     };
+    // Eventi interattivi (Mouse e Touch)
+    window.addEventListener('mousemove', (event) => {
+        targetX = (event.clientX - window.innerWidth / 2) * 2;
+        targetY = (event.clientY - window.innerHeight / 2) * 2;
+        mouseVelocity += Math.abs(event.movementX) + Math.abs(event.movementY);
+    });
+
+    window.addEventListener('touchmove', (event) => {
+        if(event.touches.length > 0) {
+            targetX = (event.touches[0].clientX - window.innerWidth / 2) * 2;
+            targetY = (event.touches[0].clientY - window.innerHeight / 2) * 2;
+            // Simuliamo una piccola velocity per attivare l'aberrazione cromatica
+            mouseVelocity += 5; 
+        }
+    }, { passive: true });
     animate();
 
     window.addEventListener('resize', () => {
