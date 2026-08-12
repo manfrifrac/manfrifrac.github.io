@@ -135,6 +135,39 @@ a, button {
 .right-aligned { align-items: flex-end; text-align: right; }
 .left-aligned { align-items: flex-start; text-align: left; }
 
+/* Scheda progetto AuruncIA Open */
+#section-4 .content-block {
+    max-width: 620px;
+}
+#section-4 .auruncia-title {
+    font-size: 2.4rem;
+    line-height: 1.1;
+}
+.auruncia-toc {
+    list-style: none;
+    margin: 1.8rem 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+.auruncia-toc li {
+    font-size: 1rem;
+    line-height: 1.5;
+    opacity: 0.9;
+    padding-left: 1.1rem;
+    border-left: 2px solid rgba(255, 255, 255, 0.25);
+}
+.auruncia-toc .toc-mod {
+    font-weight: 700;
+    color: #ffffff;
+}
+#section-4 .btn {
+    display: inline-block;
+    margin-top: 0.4rem;
+    font-weight: 600;
+}
+
 .number {
     font-size: 1.5rem; font-weight: 200; opacity: 0.5; margin-bottom: 1rem;
 }
