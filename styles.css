@@ -1,281 +1,180 @@
+/* Manfredo Fraccola — portfolio minimale (2026-08-18)
+   Editoriale chiaro: carta avorio, testo quasi nero, tipografia forte. */
+
 :root {
-    --bg-color: #080808;
-    --text-color: #ffffff;
+    --bg: #faf9f6;
+    --ink: #16181d;
+    --muted: #6b6f76;
+    --line: #e4e1da;
+    --accent: #16181d;
 }
 
-body, html {
-    cursor: none !important;
+* { box-sizing: border-box; }
+
+html, body {
     margin: 0;
     padding: 0;
-    font-family: 'Inter', sans-serif;
-    background-color: transparent; /* FONDAMENTALE: permette al canvas 3D di essere visto */
-    color: var(--text-color);
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.65;
+    font-size: 1.0625rem;
+    -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
 }
 
-a, button {
-    cursor: none !important;
-    text-decoration: none;
-    color: inherit;
+a { color: inherit; }
+
+.hero, .block, .footer {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
 }
 
-/* ================= L'EFFETTO WOW ================= */
-.preloader {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: #080808; z-index: 99999;
-    display: flex; justify-content: center; align-items: center;
+/* ============ Hero ============ */
+.hero {
+    padding-top: clamp(4rem, 14vh, 8rem);
+    padding-bottom: clamp(3rem, 10vh, 6rem);
 }
-.preloader-text {
-    font-size: 4rem; font-weight: 200; letter-spacing: 0.1em; color: #ffffff;
+.kicker {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 1.2rem;
 }
-.film-grain {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    z-index: 99998; pointer-events: none; opacity: 0.05;
-    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)"/></svg>');
-}
-.cursor-dot {
-    position: fixed; top: 0; left: 0; width: 6px; height: 6px;
-    background: #ffffff; box-shadow: 0 0 10px rgba(255,255,255,0.2);
-    border-radius: 50%; pointer-events: none; z-index: 100000;
-    transform: translate(-50%, -50%);
-}
-.cursor-outline {
-    position: fixed; top: 0; left: 0; width: 36px; height: 36px;
-    border: 1.5px solid rgba(255,255,255,0.5); box-shadow: 0 0 15px rgba(255,255,255,0.05);
-    border-radius: 50%; pointer-events: none; z-index: 100000;
-    transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s, background 0.2s, border-color 0.2s;
-}
-.cursor-hover {
-    width: 65px; height: 65px; background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,1);
-}
-
-/* ================= ARCHITETTURA V2.0 ================= */
-#webgl-container {
-    position: fixed;
-    top: 0; left: 0; width: 100vw; height: 100vh;
-    z-index: -1; pointer-events: none;
-}
-
-.scroll-container {
-    position: relative;
-    z-index: 10;
-    /* Rimosso mix-blend-mode per evitare problemi di leggibilità */
-}
-
-.editorial-section {
-    min-height: 100vh;
-    padding: 10vh 5vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-/* Glassmorphism Utility */
-.glass-panel {
-    background: rgba(12, 12, 12, 0.4);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 24px;
-    padding: 2.5rem;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.6);
-}
-
-/* Tipografia */
-.hero-titles {
-    display: inline-block;
-}
-.huge-text {
-    font-size: 8vw;
-    line-height: 1.0;
-    font-weight: 200;
-    letter-spacing: -0.04em;
-    margin: 0;
-    text-shadow: 0 10px 40px rgba(0,0,0,0.8), 0 2px 10px rgba(0,0,0,0.5);
-}
-.indent {
-    padding-left: 10vw;
-}
-
-.hero-bottom {
-    margin-top: 10vh;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.name {
+    font-size: clamp(2.9rem, 11vw, 5.5rem);
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    margin: 0 0 1.2rem;
+    text-transform: uppercase;
 }
 .role {
-    font-size: 1.2rem;
-    font-weight: 400;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    font-size: clamp(1.05rem, 2.6vw, 1.25rem);
+    color: var(--muted);
+    margin: 0 0 2.2rem;
 }
-.action-links {
-    display: flex; gap: 2rem;
+.links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
 }
 .btn {
-    font-size: 0.9rem;
-    letter-spacing: 0.15em;
-    border-bottom: 1px solid #fff;
-    padding-bottom: 0.2rem;
-    transition: opacity 0.3s;
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.7rem 1.2rem;
+    border: 1px solid var(--ink);
+    border-radius: 999px;
+    transition: background 0.2s, color 0.2s;
 }
-.btn:hover { opacity: 0.5; }
+.btn:hover { background: var(--ink); color: var(--bg); }
+.btn-primary { background: var(--ink); color: var(--bg); }
+.btn-primary:hover { background: transparent; color: var(--ink); }
 
-/* Blocchi contenuti */
-.content-block {
-    max-width: 450px;
-    background: rgba(12, 12, 12, 0.4);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 24px;
-    padding: 2.5rem;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+/* ============ Sezioni ============ */
+.block {
+    padding-top: 3.2rem;
+    padding-bottom: 3.2rem;
+    border-top: 1px solid var(--line);
 }
-.right-aligned { align-items: flex-end; text-align: right; }
-.left-aligned { align-items: flex-start; text-align: left; }
+.num {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 0.8rem;
+}
+.block h2 {
+    font-size: clamp(1.6rem, 4.5vw, 2.1rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin: 0 0 1rem;
+}
+.block p { margin: 0 0 1rem; }
+.block p:last-child { margin-bottom: 0; }
 
-/* Scheda progetto AuruncIA Open */
-#section-4 .content-block {
-    max-width: 620px;
+.block-featured {
+    border-top: 2px solid var(--ink);
 }
-#section-4 .auruncia-title {
-    font-size: 2.4rem;
-    line-height: 1.1;
-}
-.auruncia-toc {
+.block-featured .btn { margin-top: 0.6rem; }
+
+/* ============ Liste ============ */
+.list {
     list-style: none;
-    margin: 1.8rem 0;
+    margin: 1.4rem 0;
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.9rem;
+    gap: 1rem;
 }
-.auruncia-toc li {
-    font-size: 1rem;
-    line-height: 1.5;
-    opacity: 0.9;
+.list li {
     padding-left: 1.1rem;
-    border-left: 2px solid rgba(255, 255, 255, 0.25);
+    border-left: 2px solid var(--line);
 }
-.auruncia-toc .toc-mod {
-    font-weight: 700;
-    color: #ffffff;
+.year {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 500;
+    margin-left: 0.35rem;
 }
-.auruncia-toc .toc-off {
+.off {
     font-style: italic;
-    opacity: 0.45;
+    color: var(--muted);
 }
-.toc-last-project {
-    margin-top: 2.2rem;
-    padding: 1.5rem 1.6rem;
-    border: 1px solid rgba(255, 255, 255, 0.28);
-    border-left: 3px solid #ffffff;
-    background: rgba(255, 255, 255, 0.06);
-    border-radius: 4px;
+.archive li a { text-underline-offset: 3px; }
+
+/* ============ Ultimo progetto ============ */
+.last-project {
+    margin-top: 2rem;
+    padding: 1.4rem 1.5rem;
+    border: 1px solid var(--ink);
+    border-radius: 8px;
 }
-.toc-last-label {
-    font-size: 0.75rem;
+.last-label {
+    font-size: 0.72rem;
     font-weight: 700;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    opacity: 0.6;
-    margin: 0 0 0.5rem 0;
+    color: var(--muted);
+    margin: 0 0 0.4rem;
 }
-.toc-last-title {
-    font-size: 1.35rem;
-    font-weight: 700;
-    color: #ffffff;
-    margin: 0 0 0.5rem 0;
+.last-title {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin: 0 0 0.4rem;
 }
-.toc-last-desc {
-    font-size: 0.98rem;
-    line-height: 1.55;
-    opacity: 0.85;
-    margin: 0;
-}
-.toc-last-desc a {
-    color: #ffffff;
-    text-decoration: underline;
-    text-underline-offset: 2px;
-}
-#section-4 .btn {
-    display: inline-block;
-    margin-top: 0.4rem;
-    font-weight: 600;
+.last-project p:last-child { margin: 0; }
+
+/* ============ Footer ============ */
+.footer {
+    border-top: 1px solid var(--line);
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+    font-size: 0.9rem;
+    color: var(--muted);
 }
 
-.number {
-    font-size: 1.5rem; font-weight: 200; opacity: 0.5; margin-bottom: 1rem;
-}
-.section-title {
-    font-size: 3rem; font-weight: 200; margin: 0 0 1.5rem 0; letter-spacing: -0.02em;
-}
-.section-desc {
-    font-size: 1.1rem; line-height: 1.6; font-weight: 400; opacity: 0.8; margin: 0;
-}
-
-.hero-bottom {
-    margin-top: 10vh;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(12, 12, 12, 0.4);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 24px;
-    padding: 2.5rem;
-}
-
-/* ================= MOBILE RESPONSIVENESS ================= */
-@media screen and (max-width: 768px) {
-    /* Disabilita cursori custom su touch devices */
-    .cursor-dot, .cursor-outline {
-        display: none !important;
+/* ============ Scroll reveal (sottile, opzionale) ============ */
+@media (prefers-reduced-motion: no-preference) {
+    .js .reveal {
+        opacity: 0;
+        transform: translateY(14px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
     }
-    body, html, a, button {
-        cursor: auto !important;
-    }
-
-    .editorial-section {
-        padding: 5vh 5vw;
-    }
-
-    /* Riproproziona i titoli enormi */
-    .hero-titles {
-        padding: 1.5rem;
-        border-radius: 20px;
-    }
-    .huge-text {
-        font-size: 14vw;
-        line-height: 1.1;
-    }
-    .indent {
-        padding-left: 10vw;
-    }
-
-    /* Stack verticale per i blocchi */
-    .hero-bottom {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1.5rem;
-        padding: 1.5rem;
-        margin-top: 5vh;
-    }
-    .action-links {
-        flex-direction: column;
-        gap: 1rem;
-        width: 100%;
-    }
-
-    /* Ottimizzazione dei blocchi di contenuto */
-    .content-block {
-        padding: 1.5rem;
-        max-width: 100%;
-        border-radius: 16px;
-    }
-    .section-title {
-        font-size: 2.2rem;
+    .js .reveal.visible {
+        opacity: 1;
+        transform: none;
     }
 }
