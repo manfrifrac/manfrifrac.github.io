@@ -110,58 +110,6 @@ a { color: inherit; }
 }
 .block-featured .btn { margin-top: 0.6rem; }
 
-/* ============ Servizi Express ============ */
-.services {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
-    gap: 1rem;
-    margin-top: 1.4rem;
-}
-.service {
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: 1.4rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-.service h3 {
-    font-size: 1.1rem;
-    font-weight: 800;
-    letter-spacing: -0.01em;
-    margin: 0;
-}
-.service .price {
-    font-size: 1.4rem;
-    font-weight: 800;
-    margin: 0;
-}
-.service ul {
-    list-style: none;
-    margin: 0.3rem 0 0.9rem;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-    flex: 1;
-}
-.service li {
-    font-size: 0.92rem;
-    color: var(--muted);
-    padding-left: 1rem;
-    border-left: 2px solid var(--line);
-}
-.service-cta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: auto;
-}
-.service-cta .btn {
-    padding: 0.55rem 0.95rem;
-    font-size: 0.75rem;
-}
-
 /* ============ Liste ============ */
 .list {
     list-style: none;
